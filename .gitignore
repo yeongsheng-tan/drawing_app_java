@@ -3,9 +3,9 @@
 
 #IDE files
 .classpath
-.gradle
-.idea
-.meghanda
+.gradle/
+.idea/
+.meghanada/
 .project
 .settings
 
