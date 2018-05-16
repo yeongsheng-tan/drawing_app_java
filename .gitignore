@@ -8,6 +8,7 @@
 .meghanada/
 .project
 .settings
+gradle/
 
 # Compiled class file
 *.class
