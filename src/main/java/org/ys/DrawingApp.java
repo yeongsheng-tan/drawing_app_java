@@ -140,7 +140,15 @@ public class DrawingApp {
                 canvas = rectangle.paintCanvasPixels(canvas);
                 break;
             case "B":
-                System.out.println("NOT IMPLEMENTED YET!!!");
+                int[] bucketFillParams = sanitiseCommandParams(args);
+                if (bucketFillParams.length < 3)
+                    throw new IllegalArgumentException("Error: 2 integer parameters and 1 character parameter required for bucket fill!");
+                int x = bucketFillParams[0];
+                int y = bucketFillParams[1];
+                char c = args[2].charAt(0);
+                BucketFill bucketFill = new BucketFill(x, y, c);
+                canvas = bucketFill.fillCanvas(canvas);
+                break;
         }
     }
 

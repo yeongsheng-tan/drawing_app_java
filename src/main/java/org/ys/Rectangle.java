@@ -15,7 +15,7 @@ public class Rectangle {
 
     public Canvas paintCanvasPixels(Canvas canvas) {
         if (canvas == null)
-            throw new IllegalArgumentException("Canvas must be created before drawing a line!");
+            throw new IllegalArgumentException("Canvas must be created before drawing a rectangle!");
         if (!((x1 > 0 && x1 < canvas.getWidth()) && (x2 > 0 && x2 < canvas.getWidth()) && (y1 > 0 && y1 < canvas.getHeight()) && (y2 > 0 && y2 < canvas.getHeight())))
             throw new IllegalArgumentException("Rectangle coordinates must be within bounds of canvas dimension!");
 
