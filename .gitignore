@@ -9,6 +9,7 @@
 .project
 .settings
 gradle/
+README.md.temp
 
 # Compiled class file
 *.class

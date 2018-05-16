@@ -1,11 +1,22 @@
 #### A simple console drawing program written in java.
-#### The currently implemented features allow you to perform the following action
+#### The currently implemented features allow you to perform the following actions:
 ##### [Source on Github](https://github.com/yeongsheng-tan/drawing_app_java)
 ---
 ###### 1. Creates a new canvas for a specified positive integer width and height (max of 30 x 30 allowed)
 ###### 2. Quit
 ###### 3. Draw a line in the Canvas created in (1)
 ###### 4. Draw a rectangle in the Canvas created in (1)
+---
+##### Assumptions/Constraints:
+###### 1. Canvas dimension of up to a maximum 30x30 pixels supported
+###### 2. Canvas top and bottom borders are denoted using '-' character
+###### 3. Canvas left and right borders are denoted using '|' character
+###### 4. Line/Rectangle pixels are drawn using 'X' character and the body of canvas/rectangle are denoted with ' '
+###### 5. Coordinates of Lines/Rectangles must be within the bounds of Canvas dimension
+###### 6. Lines can cut one another
+###### 7. Rectangles can intersect/overlap
+###### 8. Lines are allowed to cut through rectangles
+###### 9. Drawing a new canvas initialises a new empty canvas
 ---
 ## Installation for running the compiled java jar binary 'drawing_app_java-all.jar'
 1. Install JDK8 for your target Operating System, see ([details](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
@@ -48,14 +59,61 @@ cd build/libs
 java -jar drawing_app_java-all.jar
 ```
 
-2.1 You should see the following console output once the above runs successfully:
+4. You should see the following console output once the above runs successfully:
 ```
+~/github/drawing_app_java
+➜ ~/g/drawing_app_java master ✓ gradle
+
+> Task :test
+
+CanvasTest > testDrawACanvasWithPixels() PASSED
+
+CanvasTest > testUpdateCanvasPixel() PASSED
+
+CanvasTest > testRenderCanvas() PASSED
+
+LineTest > testLineCoordinatesMustBeWithinCanvasDimension() PASSED
+
+LineTest > testCanvasMustExistBeforeLineDraw() PASSED
+
+LineTest > testCannotCreateDiagonalLine() PASSED
+
+LineTest > testDrawALine() PASSED
+
+DrawingAppTest > assertFirst2NonNumericStringInA3ParamsCommandToThrowNumberFormatException() PASSED
+
+DrawingAppTest > assertEmptyStringInA2Or3Or4ParamsCommandToThrowIllegalFormatException() PASSED
+
+DrawingAppTest > assert2NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
+
+DrawingAppTest > assert4NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
+
+DrawingAppTest > testIsAllowedCommandForValidCommands() PASSED
+
+DrawingAppTest > assertLessThan2CommandParamsToThrowIllegalArgumentException() PASSED
+
+DrawingAppTest > assertMoreThan4CommandParamsToThrowIllegalArgumentException() PASSED
+
+DrawingAppTest > testIsAllowedCommandForInvalidCommands() PASSED
+
+RectangleTest > testDrawARectangle() PASSED
+
+RectangleTest > testCanvasMustExistBeforeRectangleDraw() PASSED
+
+----------------------------------------------------------------------
+|  Results: SUCCESS (17 tests, 17 successes, 0 failures, 0 skipped)  |
+----------------------------------------------------------------------
+
+BUILD SUCCESSFUL in 1s
+5 actionable tasks: 5 executed
+
+
+➜ ~/g/drawing_app_java master ✗ cd build/libs
+➜ ~/g/d/b/libs master ✓
 ➜ ~/g/d/b/libs master ✓ java -jar drawing_app_java-all.jar
 +++++++++++++++++++++++++++++++++++
 
-
 WELCOME to the Drawing App.
-
 
 How to use:
 ============
