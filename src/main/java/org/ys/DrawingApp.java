@@ -3,7 +3,6 @@ package org.ys;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.LinkedHashMap;
-import java.util.regex.*;
 import java.util.Scanner;
 import org.ys.Canvas;
 import org.ys.Line;

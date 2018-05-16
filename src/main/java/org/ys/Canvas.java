@@ -1,7 +1,5 @@
 package org.ys;
 
-import java.util.List;
-import java.util.ArrayList;
 import org.ys.Pixel;
 
 public class Canvas {

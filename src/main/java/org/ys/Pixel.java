@@ -9,7 +9,7 @@ public class Pixel {
     }
 
     public Pixel() {
-        x = y = 0;
+        this.x = this.y = 0;
         pixel = " ";
     }
 

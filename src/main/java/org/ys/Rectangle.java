@@ -1,6 +1,5 @@
 package org.ys;
 
-import java.lang.Math;
 import org.ys.Canvas;
 
 public class Rectangle {
