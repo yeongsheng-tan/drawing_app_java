@@ -2,10 +2,14 @@
 #### The currently implemented features allow you to perform the following actions:
 ##### [Source on Github](https://github.com/yeongsheng-tan/drawing_app_java)
 ---
-###### 1. Creates a new canvas for a specified positive integer width and height (max of 30 x 30 allowed)
-###### 2. Quit
-###### 3. Draw a line in the Canvas created in (1)
-###### 4. Draw a rectangle in the Canvas created in (1)
+| S/N | Feature                                                                                                                  | Done | Tested |
+|:---:| ------------------------------------------------------------------------------------------------------------------------ |:----:|:------:|
+|   1 | Creates a new canvas for a specified positive integer width and height (max of 30 x 30 allowed)                          | ✓    | ✓      |
+|   2 | Quit                                                                                                                     | ✓    | ✓      |
+|   3 | Draw a line in the Canvas created in (1)                                                                                 | ✓    | ✓      |
+|   4 | Draw a rectangle in the Canvas created in (1)                                                                            | ✓    | ✓      |
+|   5 | Bucket fill with a user specified character, starting from a valid seed coordinate location in the canvas created in (1) | ✓    | ✓      |
+
 ---
 ##### Assumptions/Constraints:
 ###### 1. Canvas dimension of up to a maximum 30x30 pixels supported
@@ -17,6 +21,7 @@
 ###### 7. Rectangles can intersect/overlap
 ###### 8. Lines are allowed to cut through rectangles
 ###### 9. Drawing a new canvas initialises a new empty canvas
+###### 10. Bucket fill supports 2 bytes default ascii printable character set only `(i.e. from ascii decimal code 32 to ascii decimal code 127)`
 ---
 ## Installation for running the compiled java jar binary 'drawing_app_java-all.jar'
 1. Install JDK8 for your target Operating System, see ([details](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
@@ -66,6 +71,36 @@ java -jar drawing_app_java-all.jar
 
 > Task :test
 
+PixelTest > testBottomCenterBorderPixelNeighbours() PASSED
+
+PixelTest > testNeighboursAtOutsideBottomRightCornerOfRectangle() PASSED
+
+PixelTest > testTopCenterBorderPixelNeighbours() PASSED
+
+PixelTest > testPixelsOutsideRectangleAndLineCrossSectionAreNeighbours() PASSED
+
+PixelTest > testTopRightCornerPixelNeighbours() PASSED
+
+PixelTest > testTopLeftCornerPixelNeighbours() PASSED
+
+PixelTest > testPixelatedPixelAreNotNeighbours() PASSED
+
+PixelTest > testOnlyPixelsInsideRectangleAreNeighbours() PASSED
+
+PixelTest > testBottomRightCornerPixelNeighbours() PASSED
+
+PixelTest > testPixelNeighbours() PASSED
+
+PixelTest > testLeftCenterBorderPixelNeighbours() PASSED
+
+PixelTest > testRightCenterBorderPixelNeighbours() PASSED
+
+PixelTest > testOnlyPixelsInsideRectangleAndLineCrossSectionAreNeighbours() PASSED
+
+PixelTest > testBottomLeftCornerPixelNeighbours() PASSED
+
+PixelTest > testNoPixelNeighboursIfPixelIsX() PASSED
+
 CanvasTest > testDrawACanvasWithPixels() PASSED
 
 CanvasTest > testUpdateCanvasPixel() PASSED
@@ -101,7 +136,7 @@ RectangleTest > testDrawARectangle() PASSED
 RectangleTest > testCanvasMustExistBeforeRectangleDraw() PASSED
 
 ----------------------------------------------------------------------
-|  Results: SUCCESS (17 tests, 17 successes, 0 failures, 0 skipped)  |
+|  Results: SUCCESS (32 tests, 32 successes, 0 failures, 0 skipped)  |
 ----------------------------------------------------------------------
 
 BUILD SUCCESSFUL in 1s
