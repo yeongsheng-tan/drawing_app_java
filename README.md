@@ -1,6 +1,5 @@
 #### A simple console drawing program written in java.
-#### The currently implemented features allow you to perform the following actions:
-##### [Source on Github](https://github.com/yeongsheng-tan/drawing_app_java)
+##### The currently implemented features allow you to perform the following actions:
 ---
 | S/N | Feature                                                                                                                  | Done | Tested |
 |:---:| ------------------------------------------------------------------------------------------------------------------------ |:----:|:------:|
@@ -9,6 +8,7 @@
 |   3 | Draw a line in the Canvas created in (1)                                                                                 | ✓    | ✓      |
 |   4 | Draw a rectangle in the Canvas created in (1)                                                                            | ✓    | ✓      |
 |   5 | Bucket fill with a user specified character, starting from a valid seed coordinate location in the canvas created in (1) | ✓    | ✓      |
+[Source on Github](https://github.com/yeongsheng-tan/drawing_app_java)
 
 ---
 ##### Assumptions/Constraints:
