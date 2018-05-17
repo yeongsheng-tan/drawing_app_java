@@ -67,9 +67,16 @@ public class DrawingApp {
                 sanitisedParams[i] = validatedNumericParam(param);
             }
 
-            // validate x, y param for B command
-            if (params.length == 3 && i < 2) {
-                sanitisedParams[i] = validatedNumericParam(param);
+            // validate x, y, c params for B command
+            if (params.length == 3) {
+                if(i < 2)
+                    sanitisedParams[i] = validatedNumericParam(param);
+                if(i == 2) {
+                    int fillColor = (int)(param.charAt(0));
+                    if(fillColor < 33 || fillColor > 126)
+                        throw new IllegalArgumentException(("Error: Fill color for bucket must be printable character in ascii decimal code range 33 to 126!"));
+                    sanitisedParams[i] = fillColor;
+                }
             }
         }
         return sanitisedParams;
@@ -109,17 +116,17 @@ public class DrawingApp {
                 break;
             case "C":
                 canvas = null;
-                int[] canvasParams = sanitiseCommandParams(args);
-                if (canvasParams.length < 2)
+                if (args.length != 2)
                     throw new IllegalArgumentException("Error: 2 integer parameters required for canvas creation!");
+                int[] canvasParams = sanitiseCommandParams(args);
                 int width = canvasParams[0];
                 int height = canvasParams[1];
                 canvas = new Canvas(width, height);
                 break;
             case "L":
-                int[] lineParams = sanitiseCommandParams(args);
-                if (lineParams.length < 4)
+                if (args.length != 4)
                     throw new IllegalArgumentException("Error: 4 integer parameters required for line creation!");
+                int[] lineParams = sanitiseCommandParams(args);
                 x1 = lineParams[0];
                 y1 = lineParams[1];
                 x2 = lineParams[2];
@@ -127,10 +134,11 @@ public class DrawingApp {
                 Line line = new Line(x1, y1, x2, y2);
                 canvas = line.paintCanvasPixels(canvas);
                 break;
+
             case "R":
-                int[] rectangleParams = sanitiseCommandParams(args);
-                if (rectangleParams.length < 4)
+                if (args.length != 4)
                     throw new IllegalArgumentException("Error: 4 integer parameters required for rectangle creation!");
+                int[] rectangleParams = sanitiseCommandParams(args);
                 x1 = rectangleParams[0];
                 y1 = rectangleParams[1];
                 x2 = rectangleParams[2];
@@ -138,16 +146,20 @@ public class DrawingApp {
                 Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
                 canvas = rectangle.paintCanvasPixels(canvas);
                 break;
+
             case "B":
-                int[] bucketFillParams = sanitiseCommandParams(args);
-                if (bucketFillParams.length < 3)
+                if (args.length != 3)
                     throw new IllegalArgumentException("Error: 2 integer parameters and 1 character parameter required for bucket fill!");
+                int[] bucketFillParams = sanitiseCommandParams(args);
                 int x = bucketFillParams[0];
                 int y = bucketFillParams[1];
-                char c = args[2].charAt(0);
+                char c = (char)(bucketFillParams[2]);
                 BucketFill bucketFill = new BucketFill(x, y, c);
                 canvas = bucketFill.fillCanvas(canvas);
                 break;
+
+            default:
+                throw new IllegalArgumentException(("Error: Command must be either C, L, R, B or Q!"));
         }
     }
 
@@ -157,7 +169,7 @@ public class DrawingApp {
         try {
             numericParam = Integer.parseInt(param);
             if (this.canvas == null) {
-                if (numericParam <= 0 || numericParam >= 30)
+                if (numericParam <= 0 || numericParam > 30)
                     throw new IllegalArgumentException("Error: Inadmissable canvas/line/rectangle/fill command params!\nAllowed canvas width/height or line/rectangle/fill coordinates must be between 1 to 30");
             }
         } catch (NumberFormatException nfe) {
