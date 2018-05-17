@@ -22,7 +22,7 @@
 ###### 7. Rectangles can intersect/overlap
 ###### 8. Lines are allowed to cut through rectangles
 ###### 9. Drawing a new canvas initialises a new empty canvas
-###### 10. Bucket fill supports 2 bytes default ascii printable character set only `(i.e. from ascii decimal code 32 to ascii decimal code 127)`
+###### 10. Bucket fill supports 2 bytes default ascii printable character set only `(i.e. from ascii decimal code 33 to ascii decimal code 126)`
 ---
 ## Installation for running the compiled java jar binary 'drawing_app_java-all.jar'
 1. Install JDK8 for your target Operating System, see ([details](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
