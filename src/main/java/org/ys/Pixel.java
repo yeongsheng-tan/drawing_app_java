@@ -7,6 +7,14 @@ public class Pixel {
     private int x, y;
     private String pixel;
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     public String getPixel() {
         return pixel;
     }
@@ -27,67 +35,78 @@ public class Pixel {
         this.y = y;
         this.pixel = " ";
 
-        // ((y == 0 || y == height_at_boundary) && x == width_at_boundary)  -> {:ok, coord} = Pixel.new(x, y, "-\n"); coord
         if (isRightEdgeAtTopOrBottom(x, y, width, height))
             this.pixel = "-\r\n";
-        // (y == 0 || y == height_at_boundary)                              -> {:ok, coord} = Pixel.new(x, y, "-"); coord
         else if (isTopOrBottom(x, y, width, height))
             this.pixel = "-";
-        // ((y != 0 || y != height_at_boundary) && x == width_at_boundary)  -> {:ok, coord} = Pixel.new(x, y, "|\n"); coord
         else if (isRightEdge(x, y, width, height))
             this.pixel = "|\r\n";
-        // (x == 0 && y != 0 && y != height_at_boundary)                    -> {:ok, coord} = Pixel.new(x, y, "|"); coord
         else if (isLeftEdge(x, y, width, height))
             this.pixel = "|";
     }
 
-    public Set<Pixel> neighbours(Canvas canvas) {
-        Set<Pixel> myNeighbours = new HashSet();
-        Pixel[][] canvasPixels = canvas.getPixels();
+    public Set<Pixel> neighbours(int canvasWidth, int canvasHeight, Pixel[][] canvasPixels, Set<Pixel> candidatePixels, Set<Pixel> searchedPixels) {
+        searchedPixels.add(this);
 
         if (this.pixel == "X")
-            return myNeighbours;
+            return candidatePixels;
 
-        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth()) && ((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
-            if(canvasPixels[this.x - 1][this.y - 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x - 1][this.y - 1]);
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvasWidth) && ((this.y - 1) > 0) && ((this.y - 1) < canvasHeight)) {
+            if((canvasPixels[this.x - 1][this.y - 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x - 1][this.y - 1])) {
+                candidatePixels.add(canvasPixels[this.x - 1][this.y - 1]);
+                candidatePixels.addAll(canvasPixels[this.x - 1][this.y - 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if (((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
-            if(canvasPixels[this.x][this.y - 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x][this.y - 1]);
+        if (((this.y - 1) > 0) && ((this.y - 1) < canvasHeight)) {
+            if((canvasPixels[this.x][this.y - 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x][this.y - 1])) {
+                candidatePixels.add(canvasPixels[this.x][this.y - 1]);
+                candidatePixels.addAll(canvasPixels[this.x][this.y - 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if (((this.x + 1) < canvas.getWidth()) && ((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
-            if(canvasPixels[this.x + 1][this.y - 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x + 1][this.y - 1]);
+        if (((this.x + 1) < canvasWidth) && ((this.y - 1) > 0) && ((this.y - 1) < canvasHeight)) {
+            if((canvasPixels[this.x + 1][this.y - 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x + 1][this.y - 1])) {
+                candidatePixels.add(canvasPixels[this.x + 1][this.y - 1]);
+                candidatePixels.addAll(canvasPixels[this.x + 1][this.y - 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth())) {
-            if(canvasPixels[this.x - 1][this.y].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x - 1][this.y]);
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvasWidth)) {
+            if((canvasPixels[this.x - 1][this.y].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x - 1][this.y])) {
+                candidatePixels.add(canvasPixels[this.x - 1][this.y]);
+                candidatePixels.addAll(canvasPixels[this.x - 1][this.y].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if ((this.x + 1) < canvas.getWidth()) {
-            if(canvasPixels[this.x + 1][this.y].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x + 1][this.y]);
+        if ((this.x + 1) < canvasWidth) {
+            if((canvasPixels[this.x + 1][this.y].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x + 1][this.y])) {
+                candidatePixels.add(canvasPixels[this.x + 1][this.y]);
+                candidatePixels.addAll(canvasPixels[this.x + 1][this.y].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth()) && ((this.y + 1) < canvas.getHeight())) {
-            if(canvasPixels[this.x - 1][this.y + 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x - 1][this.y + 1]);
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvasWidth) && ((this.y + 1) < canvasHeight)) {
+            if((canvasPixels[this.x - 1][this.y + 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x - 1][this.y + 1])) {
+                candidatePixels.add(canvasPixels[this.x - 1][this.y + 1]);
+                candidatePixels.addAll(canvasPixels[this.x - 1][this.y + 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if ((this.y + 1) < canvas.getHeight()) {
-            if(canvasPixels[this.x][this.y + 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x][this.y + 1]);
+        if ((this.y + 1) < canvasHeight) {
+            if((canvasPixels[this.x][this.y + 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x][this.y + 1])) {
+                candidatePixels.add(canvasPixels[this.x][this.y + 1]);
+                candidatePixels.addAll(canvasPixels[this.x][this.y + 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
 
-        if (((this.x + 1) < canvas.getWidth()) && ((this.y + 1) < canvas.getHeight())) {
-            if(canvasPixels[this.x + 1][this.y + 1].getPixel() != "X")
-                myNeighbours.add(canvasPixels[this.x + 1][this.y + 1]);
+        if (((this.x + 1) < canvasWidth) && ((this.y + 1) < canvasHeight)) {
+            if((canvasPixels[this.x + 1][this.y + 1].getPixel() != "X") && !searchedPixels.contains(canvasPixels[this.x + 1][this.y + 1])) {
+                candidatePixels.add(canvasPixels[this.x + 1][this.y + 1]);
+                candidatePixels.addAll(canvasPixels[this.x + 1][this.y + 1].neighbours(canvasWidth, canvasHeight, canvasPixels, candidatePixels, searchedPixels));
+            }
         }
-        return myNeighbours;
+        return candidatePixels;
     }
 
     boolean isRightEdgeAtTopOrBottom(int x, int y, int width, int height) {
