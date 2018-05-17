@@ -1,5 +1,8 @@
 package org.ys;
 
+import java.util.Set;
+import java.util.HashSet;
+
 public class Pixel {
     private int x, y;
     private String pixel;
@@ -36,6 +39,55 @@ public class Pixel {
         // (x == 0 && y != 0 && y != height_at_boundary)                    -> {:ok, coord} = Pixel.new(x, y, "|"); coord
         else if (isLeftEdge(x, y, width, height))
             this.pixel = "|";
+    }
+
+    public Set<Pixel> neighbours(Canvas canvas) {
+        Set<Pixel> myNeighbours = new HashSet();
+        Pixel[][] canvasPixels = canvas.getPixels();
+
+        if (this.pixel == "X")
+            return myNeighbours;
+
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth()) && ((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
+            if(canvasPixels[this.x - 1][this.y - 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x - 1][this.y - 1]);
+        }
+
+        if (((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
+            if(canvasPixels[this.x][this.y - 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x][this.y - 1]);
+        }
+
+        if (((this.x + 1) < canvas.getWidth()) && ((this.y - 1) > 0) && ((this.y - 1) < canvas.getHeight())) {
+            if(canvasPixels[this.x + 1][this.y - 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x + 1][this.y - 1]);
+        }
+
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth())) {
+            if(canvasPixels[this.x - 1][this.y].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x - 1][this.y]);
+        }
+
+        if ((this.x + 1) < canvas.getWidth()) {
+            if(canvasPixels[this.x + 1][this.y].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x + 1][this.y]);
+        }
+
+        if (((this.x - 1) > 0) && ((this.x - 1) < canvas.getWidth()) && ((this.y + 1) < canvas.getHeight())) {
+            if(canvasPixels[this.x - 1][this.y + 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x - 1][this.y + 1]);
+        }
+
+        if ((this.y + 1) < canvas.getHeight()) {
+            if(canvasPixels[this.x][this.y + 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x][this.y + 1]);
+        }
+
+        if (((this.x + 1) < canvas.getWidth()) && ((this.y + 1) < canvas.getHeight())) {
+            if(canvasPixels[this.x + 1][this.y + 1].getPixel() != "X")
+                myNeighbours.add(canvasPixels[this.x + 1][this.y + 1]);
+        }
+        return myNeighbours;
     }
 
     boolean isRightEdgeAtTopOrBottom(int x, int y, int width, int height) {

@@ -1,11 +1,13 @@
 package org.ys;
 
+import java.util.Set;
+import java.util.HashSet;
 import org.ys.Canvas;
 import org.ys.Pixel;
 
 public class BucketFill {
-    int x, y;
-    char c;
+    private int x, y;
+    private char c;
 
     public BucketFill(int x, int y, char c) {
         this.x = x;
@@ -20,12 +22,11 @@ public class BucketFill {
             throw new IllegalArgumentException("Rectangle coordinates must be within bounds of canvas dimension!");
 
         Pixel[][] canvasPixels = canvas.getPixels();
-        // for (int Y = y; Y <= canvas.getHeight(); Y++) {
-        //     for (int X = x; X <= canvas.getWidth(); X++) {
-        //         if (canvasPixels[X][Y].getPixel() != "X")
-        //             canvas.setPixel(X, Y, c);
-        //     }
-        // }
+        Pixel seedPixel = canvasPixels[this.x][this.y];
+
+        Set<Pixel> candidatePixels = new HashSet<Pixel>();
+
+        candidatePixels.addAll(seedPixel.neighbours(canvas));
         return canvas;
     }
 }

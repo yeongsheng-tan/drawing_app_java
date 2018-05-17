@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-// import java.util.Arrays;
 import org.ys.Canvas;
 import org.ys.Pixel;
 

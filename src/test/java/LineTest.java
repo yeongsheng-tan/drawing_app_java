@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// import java.util.Arrays;
 import org.ys.DrawingApp;
 import org.ys.Canvas;
 import org.ys.Pixel;

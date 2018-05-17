@@ -18,6 +18,10 @@ public class Canvas {
         return pixels;
     }
 
+    public Pixel getPixel(int x, int y) {
+        return pixels[x][y];
+    }
+
     public void setPixel(int x, int y, String c) {
         Pixel pixel = new Pixel(x, y, c);
         pixels[x][y] = pixel;
