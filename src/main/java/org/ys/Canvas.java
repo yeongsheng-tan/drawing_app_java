@@ -18,30 +18,28 @@ public class Canvas {
         return pixels;
     }
 
-    public Pixel getPixel(int x, int y) {
-        return pixels[x][y];
+    public void setPixels(Pixel[][] pixels) {
+        this.pixels = pixels;
     }
 
-    public void setPixel(int x, int y, String c) {
-        Pixel pixel = new Pixel(x, y, c);
-        pixels[x][y] = pixel;
+    public Pixel getAPixel(int x, int y) {
+        return this.pixels[x][y];
     }
 
-    public void setPixel(int x, int y, char c) {
-        Pixel pixel = new Pixel(x, y, String.valueOf(c));
-        pixels[x][y] = pixel;
+    public void updateAPixel(int x, int y, String c) {
+        this.pixels[x][y].setPixelVal(c);
     }
 
     public Canvas(int w, int h) {
         this.width = w + 1;
         this.height = h + 1;
 
-        pixels = new Pixel[width + 1][height + 1];
+        this.pixels = new Pixel[width + 1][height + 1];
         Pixel pixel;
         for(int y=0; y <= height; y++){
             for(int x=0; x <= width; x++){
                 pixel = new Pixel(x, y, width, height);
-                pixels[x][y] = pixel;
+                this.pixels[x][y] = pixel;
             }
         }
     }
@@ -50,7 +48,7 @@ public class Canvas {
         String output = "";
         for(int y=0; y <= height; y++) {
             for(int x=0; x <= width; x++) {
-                output += pixels[x][y].getPixel();
+                output += this.pixels[x][y].getPixelVal();
             }
         }
         System.out.println(output);

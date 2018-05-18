@@ -27,11 +27,14 @@ public class Line {
         int xRange = xStart + Math.abs(x2 - x1);
         int yRange = yStart + Math.abs(y2 - y1);
 
+        Pixel[][] canvasPixels = canvas.getPixels();
         for (int y=yStart; y <= yRange; y++) {
             for(int x=xStart; x <= xRange; x++) {
-                canvas.setPixel(x, y, "X");
+                canvasPixels[x][y].setPixelVal("X");
+                // canvas.updateAPixel(x, y, "X");
             }
         }
+        canvas.setPixels(canvasPixels);
         return canvas;
     }
 }

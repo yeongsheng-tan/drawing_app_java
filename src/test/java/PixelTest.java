@@ -67,11 +67,12 @@ public class PixelTest {
     @Test
     public void testNoPixelNeighboursIfPixelIsX() {
         Canvas canvas = drawApp.createNewCanvas(2, 2);
-        canvas.setPixel(1, 1, "X");
 
-        Pixel pixel = canvas.getPixel(1, 1);
+        canvas.updateAPixel(1, 1, "X");
+        Pixel pixel = canvas.getPixels()[1][1];
         Set<Pixel> pixelNeighbours =  pixel.neighbours(canvas.getWidth(), canvas.getHeight(), canvas.getPixels(), candidateFillPixels, prevSearchedPixels);
 
+        assertEquals("X", pixel.getPixelVal(), "Subject pixel value should be X");
         assertFalse(pixelNeighbours.contains(pixel),"Subject pixel is not in the list of neighbours");
         assertEquals(0, pixelNeighbours.size(),"There should be no neighbours");
     }

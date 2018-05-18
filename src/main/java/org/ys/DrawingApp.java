@@ -82,25 +82,7 @@ public class DrawingApp {
         return sanitisedParams;
     }
 
-    void receiveCommand(Scanner consoleInputScanner) {
-        System.out.print("enter command: ");
-        try {
-            processCommand(consoleInputScanner.nextLine());
-            if (canvas != null)
-                canvas.render();
-        } catch(NumberFormatException nfe) {
-            System.out.println(nfe.getMessage());
-        } catch(IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        } catch(LineTypeNotSupportedException lte) {
-            System.out.println(lte.getMessage());
-        } finally {
-            printHelpMessage();
-        }
-        System.out.println();
-    }
-
-    void processCommand(String consoleInputLine) throws NumberFormatException, IllegalArgumentException {
+    public void processCommand(String consoleInputLine) throws NumberFormatException, IllegalArgumentException {
         String[] commandWithArgs = consoleInputLine.trim().split(" ");
 
         String command = commandWithArgs[0].toUpperCase();
@@ -178,10 +160,30 @@ public class DrawingApp {
         return numericParam;
     }
 
-    void quit() {
-        consoleInputScanner.close();
+    public void quit() {
         System.out.println("BYE!\n");
-        System.exit(0);
+        if(consoleInputScanner != null) {
+            consoleInputScanner.close();
+            System.exit(0);
+        }
+    }
+
+    void receiveCommand(Scanner consoleInputScanner) {
+        System.out.print("enter command: ");
+        try {
+            processCommand(consoleInputScanner.nextLine());
+            if (canvas != null)
+                canvas.render();
+        } catch(NumberFormatException nfe) {
+            System.out.println(nfe.getMessage());
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch(LineTypeNotSupportedException lte) {
+            System.out.println(lte.getMessage());
+        } finally {
+            printHelpMessage();
+        }
+        System.out.println();
     }
 
     void printHelpMessage() {

@@ -48,8 +48,12 @@ dependencies {
     // implementation 'com.google.guava:guava:23.0'
 
     // Use JUnit5 Jupiter API and TestEngine implementation
+    testCompile 'org.junit.platform:junit-platform-launcher:1.2.0'
+    testCompile 'org.junit.vintage:junit-vintage-engine:5.2.0'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.2.0'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+    testCompile 'org.mockito:mockito-junit-jupiter:2.18.3'
+    testCompile 'org.mockito:mockito-core:2.18.3'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
 }
 

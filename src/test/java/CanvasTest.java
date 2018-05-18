@@ -24,41 +24,43 @@ public class CanvasTest {
     public void testDrawACanvasWithPixels() {
         Pixel[][] canvasPixels = canvas.getPixels();
         assertAll("Top margin pixels are -",
-                  () -> assertEquals("-", canvasPixels[0][0].getPixel()),
-                  () -> assertEquals("-", canvasPixels[1][0].getPixel()),
-                  () -> assertEquals("-", canvasPixels[2][0].getPixel()),
-                  () -> assertEquals("-\r\n", canvasPixels[3][0].getPixel())
+                  () -> assertEquals("-", canvasPixels[0][0].getPixelVal()),
+                  () -> assertEquals("-", canvasPixels[1][0].getPixelVal()),
+                  () -> assertEquals("-", canvasPixels[2][0].getPixelVal()),
+                  () -> assertEquals("-\r\n", canvasPixels[3][0].getPixelVal())
         );
 
         assertAll("Bottom margin pixels are -",
-                  () -> assertEquals("-", canvasPixels[0][4].getPixel()),
-                  () -> assertEquals("-", canvasPixels[1][4].getPixel()),
-                  () -> assertEquals("-", canvasPixels[2][4].getPixel()),
-                  () -> assertEquals("-\r\n", canvasPixels[3][4].getPixel())
+                  () -> assertEquals("-", canvasPixels[0][4].getPixelVal()),
+                  () -> assertEquals("-", canvasPixels[1][4].getPixelVal()),
+                  () -> assertEquals("-", canvasPixels[2][4].getPixelVal()),
+                  () -> assertEquals("-\r\n", canvasPixels[3][4].getPixelVal())
         );
 
         assertAll("Left margin pixels are |",
-                  () -> assertEquals("|", canvasPixels[0][1].getPixel()),
-                  () -> assertEquals("|", canvasPixels[0][2].getPixel()),
-                  () -> assertEquals("|", canvasPixels[0][3].getPixel())
+                  () -> assertEquals("|", canvasPixels[0][1].getPixelVal()),
+                  () -> assertEquals("|", canvasPixels[0][2].getPixelVal()),
+                  () -> assertEquals("|", canvasPixels[0][3].getPixelVal())
         );
 
         assertAll("Right margin pixels are |\r\n",
-                  () -> assertEquals("|\r\n", canvasPixels[3][1].getPixel()),
-                  () -> assertEquals("|\r\n", canvasPixels[3][2].getPixel()),
-                  () -> assertEquals("|\r\n", canvasPixels[3][3].getPixel())
+                  () -> assertEquals("|\r\n", canvasPixels[3][1].getPixelVal()),
+                  () -> assertEquals("|\r\n", canvasPixels[3][2].getPixelVal()),
+                  () -> assertEquals("|\r\n", canvasPixels[3][3].getPixelVal())
         );
 
         assertAll("Non-border pixels are \" \"",
-                  () -> assertEquals(" ", canvasPixels[1][1].getPixel()),
-                  () -> assertEquals(" ", canvasPixels[2][2].getPixel())
+                  () -> assertEquals(" ", canvasPixels[1][1].getPixelVal()),
+                  () -> assertEquals(" ", canvasPixels[2][2].getPixelVal())
         );
     }
 
     @Test
     public void testUpdateCanvasPixel() {
-        canvas.setPixel(2, 2, "w");
+        canvas.updateAPixel(2, 2, "@");
         Pixel[][] canvasPixels = canvas.getPixels();
-        assertEquals("w", canvasPixels[2][2].getPixel());
+        Pixel subjectPixel = canvas.getAPixel(2, 2);
+        assertEquals("@", canvasPixels[2][2].getPixelVal());
+        assertEquals("@", subjectPixel.getPixelVal());
     }
 }

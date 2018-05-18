@@ -1,14 +1,20 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 import org.ys.DrawingApp;
 import org.ys.Canvas;
 
+@ExtendWith(MockitoExtension.class)
 public class DrawingAppTest {
     DrawingApp drawApp;
 
@@ -31,6 +37,41 @@ public class DrawingAppTest {
             assertFalse(drawApp.isAllowedCommand(""), () -> "\"\" is not an allowed command");
             assertFalse(drawApp.isAllowedCommand("-99"), () -> "\" \" is not an allowed command");
         });
+    }
+
+    @Test
+    public void testCCommandExpects2Arguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+           drawApp.processCommand("C 1");
+        });
+    }
+
+    @Test
+    public void testLCommandExpects4Arguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+           drawApp.processCommand("L 1 2 3 4 5");
+        });
+    }
+
+    @Test
+    public void testRCommandExpects4Arguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+           drawApp.processCommand("R 1 2 3");
+        });
+    }
+
+    @Test
+    public void testBCommandExpects3Arguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            drawApp.processCommand("B 1 2 z 4");
+        });
+    }
+
+    @Test
+    public void testQCommandInvokedQuit() {
+        DrawingApp drwApp = spy(new DrawingApp());
+        drwApp.processCommand("Q");
+        verify(drwApp, times(1)).quit();
     }
 
     @Test

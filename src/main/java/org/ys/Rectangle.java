@@ -26,6 +26,7 @@ public class Rectangle {
         canvas = left.paintCanvasPixels(canvas);
         Line right = new Line(x2, y1, x2, y2);
         canvas = right.paintCanvasPixels(canvas);
+
         return canvas;
     }
 }

@@ -28,10 +28,10 @@ public class BucketFill {
         Set<Pixel> previouslySearchedPixels = new HashSet<Pixel>();
 
         candidateFillPixels = seedPixel.neighbours(canvas.getWidth(), canvas.getHeight(), canvas.getPixels(), candidateFillPixels, previouslySearchedPixels);
-        if(seedPixel.getPixel() != "X")
+        if(seedPixel.getPixelVal() != "X")
             candidateFillPixels.add(seedPixel);
 
-        candidateFillPixels.stream().forEach(pixel -> canvas.setPixel(pixel.getX(), pixel.getY(), this.c));
+        candidateFillPixels.stream().forEach(pixel -> canvas.updateAPixel(pixel.getX(), pixel.getY(), String.valueOf(this.c)));
         return canvas;
     }
 }
