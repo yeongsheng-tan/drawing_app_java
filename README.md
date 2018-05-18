@@ -72,6 +72,12 @@ java -jar drawing_app_java-all.jar
 
 > Task :test
 
+BucketFillTest > testFillsCanvasWithSpecifiedCharacter() PASSED
+
+BucketFillTest > testFillsCorrectCanvasRegionWithSpecifiedCharacter() PASSED
+
+BucketFillTest > testCanvasMustExistBeforeBucketFill() PASSED
+
 PixelTest > testBottomCenterBorderPixelNeighbours() PASSED
 
 PixelTest > testNeighboursAtOutsideBottomRightCornerOfRectangle() PASSED
@@ -108,6 +114,8 @@ CanvasTest > testUpdateCanvasPixel() PASSED
 
 CanvasTest > testRenderCanvas() PASSED
 
+LineTest > testDrawA1PixelLine() PASSED
+
 LineTest > testLineCoordinatesMustBeWithinCanvasDimension() PASSED
 
 LineTest > testCanvasMustExistBeforeLineDraw() PASSED
@@ -116,9 +124,17 @@ LineTest > testCannotCreateDiagonalLine() PASSED
 
 LineTest > testDrawALine() PASSED
 
+LineTest > testDrawA2PixelsHorizontalLine() PASSED
+
+LineTest > testDrawA2PixelsVerticalLine() PASSED
+
 DrawingAppTest > assertFirst2NonNumericStringInA3ParamsCommandToThrowNumberFormatException() PASSED
 
 DrawingAppTest > assertEmptyStringInA2Or3Or4ParamsCommandToThrowIllegalFormatException() PASSED
+
+DrawingAppTest > testQCommandInvokedQuit() PASSED
+
+DrawingAppTest > testCCommandExpects2Arguments() PASSED
 
 DrawingAppTest > assert2NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
 
@@ -126,25 +142,36 @@ DrawingAppTest > assert4NonNumericStringCommandParamsToThrowNumberFormatExceptio
 
 DrawingAppTest > testIsAllowedCommandForValidCommands() PASSED
 
+DrawingAppTest > testBCommandExpects3Arguments() PASSED
+
 DrawingAppTest > assertLessThan2CommandParamsToThrowIllegalArgumentException() PASSED
 
 DrawingAppTest > assertMoreThan4CommandParamsToThrowIllegalArgumentException() PASSED
 
+DrawingAppTest > testLCommandExpects4Arguments() PASSED
+
 DrawingAppTest > testIsAllowedCommandForInvalidCommands() PASSED
+
+DrawingAppTest > testRCommandExpects4Arguments() PASSED
+
+RectangleTest > testDrawA1PixelRectangle() PASSED
+
+RectangleTest > testDrawA2PixelsRectangle() PASSED
+
+RectangleTest > testDrawA4PixelsSquare() PASSED
 
 RectangleTest > testDrawARectangle() PASSED
 
 RectangleTest > testCanvasMustExistBeforeRectangleDraw() PASSED
 
 ----------------------------------------------------------------------
-|  Results: SUCCESS (32 tests, 32 successes, 0 failures, 0 skipped)  |
+|  Results: SUCCESS (46 tests, 46 successes, 0 failures, 0 skipped)  |
 ----------------------------------------------------------------------
 
-BUILD SUCCESSFUL in 1s
+BUILD SUCCESSFUL in 2s
 5 actionable tasks: 5 executed
 
-
-➜ ~/g/drawing_app_java master ✗ cd build/libs
+➜ ~/g/drawing_app_java master ✓ cd build/libs
 ➜ ~/g/d/b/libs master ✓
 ➜ ~/g/d/b/libs master ✓ java -jar drawing_app_java-all.jar
 +++++++++++++++++++++++++++++++++++
