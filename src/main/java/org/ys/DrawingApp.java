@@ -18,7 +18,8 @@ public class DrawingApp {
         // loop to receive CLI command and process for next outcome
         while(true) {
             cli.receiveCommand();
-            drawApp.renderCanvas();
+            if (drawApp.canvas != null)
+                drawApp.canvas.render();
         }
     }
 
@@ -29,11 +30,6 @@ public class DrawingApp {
 
     public Canvas getCanvas() {
         return canvas;
-    }
-
-    public void renderCanvas() {
-        if (canvas != null)
-            canvas.render();
     }
 
     public void quit() {

@@ -30,7 +30,6 @@ public class Cli {
         System.out.print("enter command: ");
         try {
             processCommand(consoleInputScanner.nextLine());
-            // drawApp.renderCanvas();
         } catch(NumberFormatException nfe) {
             System.out.println(nfe.getMessage());
         } catch(IllegalArgumentException e) {
