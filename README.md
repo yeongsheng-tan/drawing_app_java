@@ -23,6 +23,7 @@
 ###### 8. Lines are allowed to cut through rectangles
 ###### 9. Drawing a new canvas initialises a new empty canvas
 ###### 10. Bucket fill supports 2 bytes default ascii printable character set only `(i.e. from ascii decimal code 33 to ascii decimal code 126)`
+###### 11. Bucket fill will not happen on pixels with character 'X'. If seed coordinate for bucket fill to begin search with, lands on an 'X' pixel, fill action aborts.
 ---
 ## Installation for running the compiled java jar binary 'drawing_app_java-all.jar'
 1. Install JDK8 for your target Operating System, see ([details](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
@@ -128,31 +129,9 @@ LineTest > testDrawA2PixelsHorizontalLine() PASSED
 
 LineTest > testDrawA2PixelsVerticalLine() PASSED
 
-DrawingAppTest > assertFirst2NonNumericStringInA3ParamsCommandToThrowNumberFormatException() PASSED
+DrawingAppTest > testDrawingAppCreatedCanvasHasCorrectWidthAndHeight() PASSED
 
-DrawingAppTest > assertEmptyStringInA2Or3Or4ParamsCommandToThrowIllegalFormatException() PASSED
-
-DrawingAppTest > testQCommandInvokedQuit() PASSED
-
-DrawingAppTest > testCCommandExpects2Arguments() PASSED
-
-DrawingAppTest > assert2NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
-
-DrawingAppTest > assert4NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
-
-DrawingAppTest > testIsAllowedCommandForValidCommands() PASSED
-
-DrawingAppTest > testBCommandExpects3Arguments() PASSED
-
-DrawingAppTest > assertLessThan2CommandParamsToThrowIllegalArgumentException() PASSED
-
-DrawingAppTest > assertMoreThan4CommandParamsToThrowIllegalArgumentException() PASSED
-
-DrawingAppTest > testLCommandExpects4Arguments() PASSED
-
-DrawingAppTest > testIsAllowedCommandForInvalidCommands() PASSED
-
-DrawingAppTest > testRCommandExpects4Arguments() PASSED
+DrawingAppTest > testDrawingAppCanUpdateAPixelInCanvas() PASSED
 
 RectangleTest > testDrawA1PixelRectangle() PASSED
 
@@ -164,8 +143,46 @@ RectangleTest > testDrawARectangle() PASSED
 
 RectangleTest > testCanvasMustExistBeforeRectangleDraw() PASSED
 
+CliTest > assertFirst2NonNumericStringInA3ParamsCommandToThrowNumberFormatException() PASSED
+
+CliTest > testQ_CommandInvokedDrawingAppQuit() PASSED
+
+CliTest > testC_CommandInvokedDrawingAppCreateNewCanvasWith2IntParams() PASSED
+
+CliTest > assertEmptyStringInA4ParamsCommandToThrowIllegalFormatException() PASSED
+
+CliTest > assertEmptyStringInA3ParamsCommandToThrowIllegalFormatException() PASSED
+
+CliTest > assertEmptyStringInA2ParamsCommandToThrowIllegalFormatException() PASSED
+
+CliTest > assert2NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
+
+CliTest > assert4NonNumericStringCommandParamsToThrowNumberFormatException() PASSED
+
+CliTest > testB_CommandExpects3Arguments() PASSED
+
+CliTest > testIsAllowedCommandForValidCommands() PASSED
+
+CliTest > testL_CommandExpects4Arguments() PASSED
+
+CliTest > testC_CommandExpects2Arguments() PASSED
+
+CliTest > testR_CommandExpects4Arguments() PASSED
+
+CliTest > assertLessThan2CommandParamsToThrowIllegalArgumentException() PASSED
+
+CliTest > assertMoreThan4CommandParamsToThrowIllegalArgumentException() PASSED
+
+CliTest > testL_CommandInvokedDrawingAppDrawLineWith4IntParams() PASSED
+
+CliTest > testB_CommandInvokedDrawingAppBucketFillWith2IntParamsAnd1CharParam() PASSED
+
+CliTest > testR_CommandInvokedDrawingAppDrawRectangleWith4IntParams() PASSED
+
+CliTest > testIsAllowedCommandForInvalidCommands() PASSED
+
 ----------------------------------------------------------------------
-|  Results: SUCCESS (46 tests, 46 successes, 0 failures, 0 skipped)  |
+|  Results: SUCCESS (54 tests, 54 successes, 0 failures, 0 skipped)  |
 ----------------------------------------------------------------------
 
 BUILD SUCCESSFUL in 2s
@@ -174,12 +191,14 @@ BUILD SUCCESSFUL in 2s
 ➜ ~/g/drawing_app_java master ✓ cd build/libs
 ➜ ~/g/d/b/libs master ✓
 ➜ ~/g/d/b/libs master ✓ java -jar drawing_app_java-all.jar
-+++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
-WELCOME to the Drawing App.
+| WELCOME to the Drawing App. |
 
++++++++++++++++++++++++++++++++
 How to use:
-============
+
+================
         C - format: "C w h". Creates a new canvas of width w and height h. w and h must be greater than 0 and less than or equals to 30
         L - format: "L x1 y1 x2 y2". Creates a new line of 'x' from (x1,y1) to (x2,y2). Only supports horizontal or vertical lines.
         R - format: "R x1 y1 x2 y2". Creates a new rectangle, (x1,y1) is upper left corner & (x2,y2) is lower right corner.
