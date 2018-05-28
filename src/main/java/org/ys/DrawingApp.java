@@ -14,7 +14,6 @@ public class DrawingApp {
         DrawingApp drawApp = new DrawingApp();
         Cli cli = new Cli(drawApp);
 
-
         // loop to receive CLI command and process for next outcome
         while(true) {
             cli.receiveCommand();
